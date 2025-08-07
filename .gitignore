@@ -1,0 +1,52 @@
+# IDE and Editor Files
+.vscode/
+.history/
+.idea/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Environment Variables
+# Ignore all .env files to protect sensitive keys.
+# Commit .env.example or include setup steps in the README.
+.env
+.env.*
+
+# Python/FastAPI Backend
+#
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environments
+venv/
+env/
+.venv/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Test & Coverage Reports
+.coverage
+.pytest_cache/
+
+# Node.js/React Frontend
+#
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+# This will ignore node_modules in both the root and /frontend
+**/node_modules/
+
+# React build output
+/frontend/build

@@ -1,0 +1,98 @@
+﻿Genzoic “Market-Pulse” Coding Assessment
+4-hour MVP / prototype challenge
+Problem Statement
+Build a Market-Pulse micro-service that answers: “Is TICKER looking bullish, bearish, or neutral for tomorrow, and why?”
+Your solution must:
+1. Collect two raw signals for a given stock ticker (e.g., AAPL, NVDA, MSFT).
+
+Signal
+	Required Output
+	Example Data Source
+	Price Momentum
+	Last 5 trading-day returns & a simple momentum score
+	Alpha Vantage, Twelve Data, Finnhub
+	News Feed
+	5 latest headlines (title + description)
+	NewsAPI, GNews, Mediastack
+	   2. Invoke an LLM (Use Gemini or any other that offers a free tier for APIs) with those signals and ask it to:
+   1. Decide the overall “pulse” (bullish / neutral / bearish)
+   2. Produce a brief explanation referencing the momentum and news context
+
+      3. Expose one REST endpoint
+
+GET /api/v1/market-pulse?ticker=MSFT
+
+
+Sample JSON response
+{
+  "ticker": "MSFT",
+  "as_of": "2025-07-17",
+  "momentum": { "returns": [-0.3, +0.4, +1.1, -0.2, +0.7], "score": 0.34 },
+  "news": [
+    { "title": "Microsoft unveils AI chips", "description": "…", "url": "…" },
+    …
+  ],
+  "pulse": "bullish",
+  "llm_explanation": "Momentum is moderately positive (0.34) and four of five headlines highlight product launches and strong earnings; hence bullish."
+}
+
+
+         4. Connect with a Simple Front End (Preferably in React or Angular JS)
+
+A simple, clean chat based interface for the user to enter the ticker. It will then trigger the API and get the JSON response. Show the llm_explanation parsed out of the JSON as the response - along with the full JSON response collapsed by default which can be expanded to see more details if needed
+
+
+
+
+Expected Output 
+
+
+Area
+	Requirements
+	Importance
+	Backend
+	• Python (FastAPI) or Node (Express / Nest)
+• Async fetch of price & news APIs
+• In-memory TTL cache (≥ 10 min)
+• Call to the chosen LLM with a clear prompt
+	Top priority
+	Computation
+	• Simple momentum score function (choose any - use your imagination)
+• Prompt engineering for consistent pulse & explanation
+	Top priority
+	DevOps
+	• Dockerfile (slim, non-root)
+	Optional - Bonus
+	Frontend
+	• React or Angular SPA with a chat-style box: User enters TICKER → UI calls backend → UI shows raw JSON + pretty card of pulse & explanation
+	Top priority
+	Docs
+	• README with setup, env vars, sample curl, design notes
+	Top priority
+	Cloud / K8s
+	deployment.yaml, service.yaml, probes
+	Optional - Bonus
+	CI/CD
+	GitHub Actions (lint + small unit test)
+	Optional - Bonus
+	Tests
+	pytest / jest for momentum & prompt function
+	Optional - Bonus
+	UI Polish
+	Recharts sparkline for last-5-day prices; dark/light theme
+	Optional - Bonus
+	Final Deliverables
+GitHub repo containing:
+            * src/ backend code
+            * frontend/ React / Angular app
+            * (optional) Dockerfile, docker-compose.yml
+            * (optional) k8s/ manifests
+            * README.md (setup, API spec, design trade-offs, “next steps”)
+
+Practical Notes for Candidates
+               * Four hours fly by – it’s OK if you can’t finish every stretch goal; ship a runnable slice and note “next steps” in the README.
+               * You may use any AI assistant, templates, or boilerplates; just credit major snippets in comments.
+               * Speak aloud your thinking during the recorded session and commit often – we value transparency over polish.
+
+
+Have fun building something you’d be proud to demo to us! 🙂 All the best 🤝
